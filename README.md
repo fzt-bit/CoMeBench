@@ -26,6 +26,31 @@ python -m http.server 8000
 
 Or open the folder in VS Code and hit **Go Live** (Live Server extension).
 
+## 可视化编辑（不写代码改内容）
+
+双击 **`开始可视化编辑.bat`**，它会启动本地服务并自动用浏览器打开编辑模式。
+
+或者在任意浏览器地址后面加 `?edit=1`：
+
+```
+http://127.0.0.1:5500/?edit=1
+file:///D:/CoMeBench-site/index.html?edit=1
+```
+
+进入编辑模式后：
+
+- 页面上**所有文字都可直接点击修改**，像改 Word 一样
+- 鼠标悬停会出现虚线框，表示这块能改
+- 底部工具栏显示**还剩多少处占位符**
+- 改完点 **「保存修改」**（或按 `Ctrl+S`），会直接覆盖 `index.html`
+- 想反悔点 **「放弃并刷新」**
+
+保存后的文件是干净的 HTML：编辑器的工具栏、`contenteditable` 属性、运行时残留的 CSS 类都会被自动剥掉，同时保留所有 HTML 注释和 `class="tbd"` 占位标记，所以可以反复编辑。
+
+发布出去的页面对访客完全无影响——`editor.js` 只有在网址带 `?edit=1` 时才会启动。
+
+> 通过 `http://` 打开时可以直接覆盖原文件；直接双击 `index.html`（`file://`）打开时会退化为"下载一个新文件"，需要你手动替换。
+
 ## What is still placeholder
 
 Every placeholder is wrapped in `<span class="tbd">…</span>`, which renders as
