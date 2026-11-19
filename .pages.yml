@@ -1,0 +1,344 @@
+# =====================================================================
+# Pages CMS configuration  ·  https://pagescms.org
+#
+# 每个编辑器都会看到中文表单界面。修改后直接提交到本仓库，
+# GitHub Pages 会在约 1 分钟内自动重建站点。
+#
+# 「页面模块」是 block 列表：可以自由新增、删除、上下拖动排序。
+# =====================================================================
+
+media:
+  input: assets
+  output: assets
+
+content:
+  - name: content
+    label: 页面内容
+    type: file
+    path: content.json
+    format: json
+    fields:
+
+      # ---------------------------------------------------------- 基本信息
+      - name: site
+        label: ① 基本信息
+        type: object
+        fields:
+          - name: title
+            label: 网站标题
+            type: string
+          - name: venue
+            label: 状态 / 会议标签
+            type: string
+            description: 显示在标题上方的胶囊标签，例如「CoRL 2026 · Spotlight」
+          - name: tagline
+            label: 一句话简介
+            type: string
+            description: 支持 **粗体** 和 *斜体*
+          - name: authors
+            label: 作者
+            type: object
+            list: true
+            fields:
+              - name: name
+                label: 姓名
+                type: string
+              - name: sup
+                label: 单位编号（上标）
+                type: string
+          - name: affiliations
+            label: 单位
+            type: string
+            list: true
+          - name: affilNotes
+            label: 补充说明
+            type: string
+            description: 例如「* 共同一作　† 通讯作者」，可留空
+          - name: links
+            label: 链接按钮
+            type: object
+            fields:
+              - name: paper
+                label: 论文
+                type: string
+              - name: code
+                label: 代码
+                type: string
+              - name: dataset
+                label: 数据集
+                type: string
+              - name: github
+                label: GitHub
+                type: string
+              - name: leaderboard
+                label: 榜单提交
+                type: string
+              - name: citation
+                label: 引用 BibTeX
+                type: text
+
+      # ------------------------------------------------------------ 首屏数字
+      - name: hero
+        label: ② 首屏数字条
+        type: object
+        fields:
+          - name: stats
+            label: 关键数字（建议 3–4 个）
+            type: object
+            list: true
+            fields:
+              - name: value
+                label: 数值
+                type: string
+              - name: label
+                label: 说明
+                type: string
+
+      # -------------------------------------------------------------- 模块
+      - name: sections
+        label: ③ 页面模块
+        type: block
+        list: true
+        blockKey: type
+        blocks:
+
+          # 通用字段在下面每种模块里都有：id / nav / alternate / eyebrow / heading
+          - name: overview
+            label: 概述（左文字 + 右侧信息卡）
+            fields:
+              - name: id
+                label: 锚点 ID
+                type: string
+                description: 用于导航跳转，英文小写，例如 overview
+              - name: nav
+                label: 导航栏文字
+                type: string
+                description: 留空则不出现在顶部导航
+              - name: alternate
+                label: 使用浅灰背景
+                type: boolean
+              - name: eyebrow
+                label: 小标题
+                type: string
+              - name: heading
+                label: 大标题
+                type: string
+              - name: description
+                label: 标题下的说明
+                type: text
+              - name: paragraphs
+                label: 正文段落
+                type: text
+                list: true
+              - name: aside
+                label: 右侧信息卡
+                type: object
+                fields:
+                  - name: title
+                    label: 标题
+                    type: string
+                  - name: rows
+                    label: 信息行
+                    type: object
+                    list: true
+                    fields:
+                      - name: label
+                        label: 名称
+                        type: string
+                      - name: value
+                        label: 内容
+                        type: string
+                  - name: buttonLabel
+                    label: 按钮文字
+                    type: string
+                  - name: buttonUrl
+                    label: 按钮链接
+                    type: string
+
+          - name: cards
+            label: 卡片网格（特性介绍）
+            fields:
+              - name: id
+                label: 锚点 ID
+                type: string
+              - name: nav
+                label: 导航栏文字
+                type: string
+              - name: alternate
+                label: 使用浅灰背景
+                type: boolean
+              - name: eyebrow
+                label: 小标题
+                type: string
+              - name: heading
+                label: 大标题
+                type: string
+              - name: description
+                label: 标题下的说明
+                type: text
+              - name: items
+                label: 卡片
+                type: object
+                list: true
+                fields:
+                  - name: icon
+                    label: 图标
+                    type: string
+                    description: 可选 grid / list / chart / paper / code / dataset
+                  - name: title
+                    label: 标题
+                    type: string
+                  - name: text
+                    label: 说明
+                    type: text
+
+          - name: tasks
+            label: 任务卡片网格
+            fields:
+              - name: id
+                label: 锚点 ID
+                type: string
+              - name: nav
+                label: 导航栏文字
+                type: string
+              - name: alternate
+                label: 使用浅灰背景
+                type: boolean
+              - name: eyebrow
+                label: 小标题
+                type: string
+              - name: heading
+                label: 大标题
+                type: string
+              - name: description
+                label: 标题下的说明
+                type: text
+              - name: items
+                label: 任务
+                type: object
+                list: true
+                fields:
+                  - name: tag
+                    label: 分类标签
+                    type: string
+                  - name: tagColor
+                    label: 标签配色
+                    type: string
+                    description: 填 a / b / c / d，对应四种渐变色
+                  - name: title
+                    label: 任务名
+                    type: string
+                  - name: text
+                    label: 一句话说明
+                    type: text
+              - name: moreLabel
+                label: 更多卡片文字
+                type: string
+                description: 留空则不显示「更多」卡片
+              - name: moreText
+                label: 更多卡片链接文字
+                type: string
+              - name: moreUrl
+                label: 更多卡片链接
+                type: string
+
+          - name: table
+            label: 榜单表格
+            fields:
+              - name: id
+                label: 锚点 ID
+                type: string
+              - name: nav
+                label: 导航栏文字
+                type: string
+              - name: alternate
+                label: 使用浅灰背景
+                type: boolean
+              - name: eyebrow
+                label: 小标题
+                type: string
+              - name: heading
+                label: 大标题
+                type: string
+              - name: description
+                label: 标题下的说明
+                type: text
+              - name: columns
+                label: 表头（不含 Model 和 Average）
+                type: string
+                list: true
+              - name: rows
+                label: 数据行
+                type: object
+                list: true
+                fields:
+                  - name: model
+                    label: 模型名
+                    type: string
+                  - name: badge
+                    label: 徽章文字
+                    type: string
+                    description: 例如 ours / upper bound，可留空
+                  - name: isOurs
+                    label: 标记为我们的方法
+                    type: boolean
+                  - name: ghost
+                    label: 灰色斜体行（如人类水平）
+                    type: boolean
+                  - name: cells
+                    label: 各列数值
+                    type: string
+                    list: true
+                  - name: average
+                    label: 平均
+                    type: string
+              - name: note
+                label: 表格下方说明
+                type: text
+
+          - name: code
+            label: 代码块（可带步骤列表）
+            fields:
+              - name: id
+                label: 锚点 ID
+                type: string
+              - name: nav
+                label: 导航栏文字
+                type: string
+              - name: alternate
+                label: 使用浅灰背景
+                type: boolean
+              - name: narrow
+                label: 窄版居中
+                type: boolean
+              - name: eyebrow
+                label: 小标题
+                type: string
+              - name: heading
+                label: 大标题
+                type: string
+              - name: description
+                label: 标题下的说明
+                type: text
+              - name: filename
+                label: 代码块标题
+                type: string
+                description: 显示在代码块左上角，例如 terminal / bibtex
+              - name: code
+                label: 代码内容
+                type: text
+              - name: codeFrom
+                label: 改用「基本信息」里的 BibTeX
+                type: string
+                description: 填 citation 则自动使用上方填写的引用内容
+              - name: steps
+                label: 右侧步骤列表
+                type: object
+                list: true
+                fields:
+                  - name: title
+                    label: 步骤标题
+                    type: string
+                  - name: text
+                    label: 步骤说明
+                    type: text

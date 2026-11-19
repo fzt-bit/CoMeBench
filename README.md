@@ -1,114 +1,104 @@
 # CoMeBench — project page
 
-A self-contained static site for the CoMeBench dataset. No build step, no
-dependencies, no CDN — open `index.html` and it works, online or offline.
+A static, **content-driven** site for the CoMeBench dataset. Text lives in
+`content.json`, the page renders itself from it, and editors change content
+through a web admin (Pages CMS) — no code required.
+
+## 结构
 
 ```
-D:\CoMeBench-site\
-├─ index.html          ← all the content lives here
-├─ styles.css          ← visual design, palette from the logo
-├─ script.js           ← nav, scroll-spy, copy buttons (~120 lines)
-└─ assets\
-   ├─ logo.svg         ← your gradient wordmark
-   └─ favicon.svg      ← generated "C" tile in the same gradient
+CoMeBench-site/
+├─ index.html      ← 空壳：只放 <head> 和容器，不写任何文案
+├─ content.json    ← 全部内容（人写的都在这）
+├─ render.js       ← 渲染器：读 content.json，生成页面
+├─ styles.css      ← 视觉设计（配色取自 logo）
+├─ .pages.yml      ← 后台配置：定义每个编辑器能填哪些字段
+├─ 开始本地预览.bat  ← 双击启动本地服务器
+└─ assets/
+   ├─ logo.svg
+   └─ favicon.svg
 ```
 
-## Preview locally
+**为什么这样分**：以前文案写死在 HTML 里，加一段话要改代码；现在文案是数据，
+页面是模板。别人加内容不碰 HTML，也不再需要我这样的角色在中间转一道。
 
-Double-click `index.html`. For a proper local server (recommended — some
-browsers restrict `file://`):
+## 三种修改方式
 
-```powershell
-cd D:\CoMeBench-site
-python -m http.server 8000
-# then open http://localhost:8000
-```
+### 1. 后台可视化改（推荐给编辑者）
 
-Or open the folder in VS Code and hit **Go Live** (Live Server extension).
+[Pages CMS](https://app.pagescms.org) 是托管服务，不需要自己部署：
 
-## 可视化编辑（不写代码改内容）
+1. 打开 https://app.pagescms.org
+2. 用 GitHub 账号登录
+3. 授权后选择仓库 `fzt-bit/CoMeBench`
+4. 左侧看到 **「页面内容」**，分成三段：
 
-双击 **`开始可视化编辑.bat`**，它会启动本地服务并自动用浏览器打开编辑模式。
+| 区块 | 能改什么 |
+|---|---|
+| ① 基本信息 | 标题、会议标签、一句话简介、作者、单位、链接、BibTeX |
+| ② 首屏数字条 | 那几个大数字和说明 |
+| ③ 页面模块 | **可以新增、删除、上下拖动排序** |
 
-或者在任意浏览器地址后面加 `?edit=1`：
+「③ 页面模块」是重点：点 **Add** 会让你选模块类型，填完就多一块；拖动可以调整
+顺序；删掉就整块消失。保存后自动提交到 GitHub，Pages 约 1 分钟自动重建。
 
-```
-http://127.0.0.1:5500/?edit=1
-file:///D:/CoMeBench-site/index.html?edit=1
-```
+> **给编辑者的权限**：对方需要是这个仓库的协作者。
+> 仓库 → Settings → Collaborators → Add people，输入对方的 GitHub 用户名。
 
-进入编辑模式后：
+### 2. 直接改 content.json
 
-- 页面上**所有文字都可直接点击修改**，像改 Word 一样
-- 鼠标悬停会出现虚线框，表示这块能改
-- 底部工具栏显示**还剩多少处占位符**
-- 改完点 **「保存修改」**（或按 `Ctrl+S`），会直接覆盖 `index.html`
-- 想反悔点 **「放弃并刷新」**
+适合只改几处文字。文件是纯 JSON，改完保存即可。注意：
 
-保存后的文件是干净的 HTML：编辑器的工具栏、`contenteditable` 属性、运行时残留的 CSS 类都会被自动剥掉，同时保留所有 HTML 注释和 `class="tbd"` 占位标记，所以可以反复编辑。
+- 用 UTF-8 保存，不要用记事本另存成 ANSI，中文会乱码
+- 支持极简 Markdown：`**粗体**`、`*斜体*`、`` `代码` ``
+- 改完用 `开始本地预览.bat` 检查，没问题再提交
 
-发布出去的页面对访客完全无影响——`editor.js` 只有在网址带 `?edit=1` 时才会启动。
+### 3. 让 AI 改
 
-> 通过 `http://` 打开时可以直接覆盖原文件；直接双击 `index.html`（`file://`）打开时会退化为"下载一个新文件"，需要你手动替换。
+把 content.json 或一句话需求发过来即可。
 
-## What is still placeholder
+## 本地预览
 
-Every placeholder is wrapped in `<span class="tbd">…</span>`, which renders as
-the lavender highlight you see on the page. Find them all with:
+双击 **`开始本地预览.bat`**，会自动起服务并打开 http://127.0.0.1:5500
 
-```powershell
-Select-String -Path .\index.html -Pattern 'class="tbd"'
-```
+必须用服务器打开，**不能直接双击 index.html**——浏览器会以 `file://` 协议
+拦截 `content.json` 的读取，页面会显示一段提示而不是内容。
 
-Replace the span with real text, **and keep the surrounding tags** — e.g.
+## 模块类型
 
-```html
-<!-- before -->
-<span class="tbd">12</span>
-<!-- after  -->
-12
-```
+渲染器认识 5 种模块，都在 `render.js` 的 `RENDERERS` 里：
 
-When every `.tbd` is gone, the page is clean. The `.tbd` rule in `styles.css`
-can then be deleted.
+| type | 长什么样 | 主要字段 |
+|---|---|---|
+| `overview` | 左文字 + 右侧信息卡 | paragraphs, aside |
+| `cards` | 三列特性卡片 | items(icon/title/text) |
+| `tasks` | 任务卡片网格 + 「更多」卡 | items(tag/tagColor/title/text) |
+| `table` | 榜单表格 | columns, rows, note |
+| `code` | 深色代码块（可带步骤列表） | filename, code, steps |
 
-Links worth checking: the four `data-tbd` anchors (`Paper`, `Code`, `Dataset`,
-`GitHub` in the nav) still point at `#`. Give them real URLs and remove the
-`data-tbd` attribute.
+**想加一种新模块**（比如「图片墙」「时间线」「视频嵌入」）：在
+`render.js` 的 `RENDERERS` 里加一个函数，再在 `.pages.yml` 的 `blocks`
+里加一段字段定义。两处各加一段，后台立刻出现这个新类型。
 
-## Deploy to GitHub Pages
+## 发布
 
-1. Create a repo, e.g. `CoMeBench`, and push these four items:
+推送到 GitHub 后，仓库 → Settings → Pages：
 
-   ```powershell
-   cd D:\CoMeBench-site
-   git init
-   git add index.html styles.css script.js assets
-   git commit -m "CoMeBench project page"
-   git branch -M main
-   git remote add origin https://github.com/<org>/CoMeBench.git
-   git push -u origin main
-   ```
+- Source: `Deploy from a branch`
+- Branch: `main`，文件夹 `/ (root)`
+- Save
 
-2. Repo → **Settings** → **Pages** → Source: `Deploy from a branch`,
-   Branch: `main`, Folder: `/ (root)` → **Save**.
+网址：**https://fzt-bit.github.io/CoMeBench/**
 
-3. Live at `https://<org>.github.io/CoMeBench/` in about a minute.
+> 注意：Pages 的 CDN 会缓存约 10 分钟，改动不会立刻在所有网络生效。
 
-If the repo is named `<org>.github.io` instead, it serves at the root domain.
-Once you know the final URL, put it in the `<meta property="og:image">` tag so
-link previews work.
+## 已知取舍
 
-## Design notes
+- **页面需要 JavaScript**。内容在加载后才渲染，所以搜索引擎和社交平台的抓取
+  可能拿不到正文。`<title>` 和 og 标签是写死在 index.html 里的，需要改标题时
+  手动改那几行。
+- 换来的是**零构建**：没有 CI、没有构建失败、编辑器改错也只会显示错文字，
+  不会让站点挂掉。对非技术编辑者更友好。
 
-- Palette is sampled from `assets/logo.svg`:
-  `#8077E4 → #4565E8 → #237ACC → #078FAF → #009788`. Change the five
-  `--brand-*` variables in `:root` to re-theme the whole page.
-- The logo is used at three sizes: 24 px in the nav, 560 px in the hero, 20 px
-  in the footer. Since it is a wide wordmark (aspect ≈ 5.14 : 1), it replaces
-  the `<h1>` text — screen readers still get "CoMeBench" from the `alt`.
-- No web fonts are loaded, so there is no layout shift and no network
-  dependency. The stack falls back through Segoe UI / PingFang / YaHei.
-- Responsive breakpoints: 900 px (nav collapses, two-column layouts stack) and
-  640 px (stat grid becomes 2×2, tighter padding).
-- `prefers-reduced-motion` is respected.
+如果以后需要更好的 SEO，可以加一步静态生成（11ty/Astro + GitHub Actions），
+把 content.json 预渲染成 HTML，结构不用变。

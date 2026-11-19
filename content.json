@@ -1,0 +1,160 @@
+{
+  "site": {
+    "title": "CoMeBench",
+    "venue": "Under review · 2026",
+    "tagline": "A **benchmark** for evaluating models on …",
+    "authors": [
+      { "name": "Author One", "sup": "1" },
+      { "name": "Author Two", "sup": "1,2" },
+      { "name": "Author Three", "sup": "2" },
+      { "name": "Author Four", "sup": "1" }
+    ],
+    "affiliations": ["Your University", "Your Lab / Institute"],
+    "affilNotes": "",
+    "links": {
+      "paper": "",
+      "code": "",
+      "dataset": "",
+      "github": "",
+      "leaderboard": null
+    },
+    "citation": "@misc{yourtag2026comebench,\n  title  = {CoMeBench: A Benchmark for …},\n  author = {Last, First and Last, First},\n  year   = {2026},\n  note   = {arXiv preprint / dataset release},\n  url    = {https://…}\n}"
+  },
+
+  "hero": {
+    "stats": [
+      { "value": "12", "label": "Tasks" },
+      { "value": "4", "label": "Capability dimensions" },
+      { "value": "18k", "label": "Instances" },
+      { "value": "9", "label": "Baseline models" }
+    ]
+  },
+
+  "sections": [
+    {
+      "type": "overview",
+      "id": "overview",
+      "nav": "Overview",
+      "eyebrow": "Overview",
+      "heading": "Why CoMeBench",
+      "paragraphs": [
+        "**CoMeBench** is a benchmark for …. It provides a unified, reproducible evaluation protocol so that results across papers are directly comparable, and it ships with a public dataset, evaluation scripts and a maintained leaderboard.",
+        "Write two or three sentences on the gap you are filling: what existing benchmarks miss, and what CoMeBench does differently. Keep it concrete — a number or a concrete failure mode of prior work reads far better than an adjective.",
+        "Every task is language-conditioned, and the whole suite can be run locally in under an hour on a single GPU."
+      ],
+      "aside": {
+        "title": "At a glance",
+        "rows": [
+          { "label": "Release", "value": "v1.0 · Nov 2026" },
+          { "label": "License", "value": "CC BY 4.0" },
+          { "label": "Modality", "value": "Text / Image / Video" },
+          { "label": "Splits", "value": "dev · test · hidden" },
+          { "label": "Metric", "value": "Accuracy · F1" }
+        ],
+        "buttonLabel": "Download dataset",
+        "buttonUrl": ""
+      }
+    },
+
+    {
+      "type": "cards",
+      "id": "design",
+      "nav": "",
+      "alternate": true,
+      "eyebrow": "Design",
+      "heading": "What makes it different",
+      "description": "",
+      "items": [
+        {
+          "icon": "grid",
+          "title": "Controlled difficulty",
+          "text": "Each task varies one factor at a time, so a score drop can be attributed to a specific capability instead of being an average over confounded settings."
+        },
+        {
+          "icon": "list",
+          "title": "Automatic scoring",
+          "text": "Every instance has a programmatic checker, so evaluation needs no human judges and runs identically on any machine."
+        },
+        {
+          "icon": "chart",
+          "title": "Held-out split",
+          "text": "A hidden test split guards against overfitting to the public leaderboard, with a submission server for blind evaluation."
+        }
+      ]
+    },
+
+    {
+      "type": "tasks",
+      "id": "benchmark",
+      "nav": "Benchmark",
+      "alternate": false,
+      "eyebrow": "Benchmark",
+      "heading": "The task suite",
+      "description": "Tasks are grouped into four capability dimensions. Replace the cards below with your real task names and one-line descriptions.",
+      "items": [
+        { "tag": "Dimension A", "tagColor": "a", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension A", "tagColor": "a", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension B", "tagColor": "b", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension B", "tagColor": "b", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension C", "tagColor": "c", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension C", "tagColor": "c", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension D", "tagColor": "d", "title": "Task name", "text": "One sentence describing what the model has to do." },
+        { "tag": "Dimension D", "tagColor": "d", "title": "Task name", "text": "One sentence describing what the model has to do." }
+      ],
+      "moreLabel": "+ 4 more tasks",
+      "moreText": "See the full list →",
+      "moreUrl": ""
+    },
+
+    {
+      "type": "table",
+      "id": "leaderboard",
+      "nav": "Leaderboard",
+      "alternate": true,
+      "eyebrow": "Leaderboard",
+      "heading": "Current results",
+      "description": "Numbers below are placeholders — replace them with your own evaluation results.",
+      "columns": ["Dimension A", "Dimension B", "Dimension C", "Dimension D"],
+      "rows": [
+        { "model": "Your model", "badge": "ours", "isOurs": true, "cells": ["—", "—", "—", "—"], "average": "—" },
+        { "model": "Baseline B", "badge": "", "isOurs": false, "cells": ["—", "—", "—", "—"], "average": "—" },
+        { "model": "Baseline A", "badge": "", "isOurs": false, "cells": ["—", "—", "—", "—"], "average": "—" },
+        { "model": "Human performance", "badge": "upper bound", "isOurs": false, "ghost": true, "cells": ["—", "—", "—", "—"], "average": "—" }
+      ],
+      "note": "Submit your results via the leaderboard form. Entries are verified against the hidden test split before they appear here."
+    },
+
+    {
+      "type": "code",
+      "id": "start",
+      "nav": "Get started",
+      "alternate": false,
+      "eyebrow": "Get started",
+      "heading": "Run it in four steps",
+      "description": "",
+      "filename": "terminal",
+      "code": "# 1. get the code\ngit clone https://github.com/<org>/CoMeBench\ncd CoMeBench\n\n# 2. install dependencies\npip install -e .\n\n# 3. download the data\npython scripts/download.py --root ./data\n\n# 4. evaluate your model\npython eval.py --model your-model --split test",
+      "steps": [
+        { "title": "Clone & install", "text": "Requires Python 3.10+ and a single GPU." },
+        { "title": "Download data", "text": "~2.4 GB compressed, checksum-verified." },
+        { "title": "Plug in a model", "text": "Implement one predict() function, or use a bundled baseline." },
+        { "title": "Submit", "text": "Export predictions and upload to the leaderboard." }
+      ]
+    },
+
+    {
+      "type": "code",
+      "id": "cite",
+      "nav": "Citation",
+      "alternate": true,
+      "narrow": true,
+      "eyebrow": "Citation",
+      "heading": "Cite CoMeBench",
+      "description": "",
+      "filename": "bibtex",
+      "codeFrom": "citation",
+      "code": "",
+      "steps": []
+    }
+  ]
+}
