@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CoMeBench — A Benchmark for …</title>
+<meta name="description" content="CoMeBench is a benchmark for evaluating … across … tasks.">
+
+<!-- Open Graph: replace the URL once the site is deployed -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="CoMeBench">
+<meta property="og:description" content="A benchmark for …">
+<meta property="og:image" content="assets/logo.svg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="preload" as="image" href="assets/logo.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<a class="skip-link" href="#overview">Skip to content</a>
+
+<!-- ============================================================ NAV -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" aria-label="CoMeBench home">
+      <img src="assets/logo.svg" alt="CoMeBench" height="24">
+    </a>
+
+    <nav class="nav-links" id="navLinks" aria-label="Section navigation">
+      <a href="#overview">Overview</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#start">Get started</a>
+      <a href="#cite">Citation</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a class="btn btn-ghost btn-sm" href="#" data-tbd="GitHub URL">GitHub ↗</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-progress" id="navProgress"></div>
+</header>
+
+<main id="top">
+
+  <!-- ========================================================== HERO -->
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+      <div class="grid-lines"></div>
+    </div>
+
+    <div class="container hero-inner">
+      <div class="venue-pill">
+        <span class="dot"></span>
+        <span data-tbd="Venue · Year">Under review · 2026</span>
+      </div>
+
+      <h1 class="hero-logo">
+        <img src="assets/logo.svg" alt="CoMeBench">
+      </h1>
+
+      <p class="hero-sub">
+        A <strong>benchmark</strong> for <span class="tbd">evaluating models on …</span>
+      </p>
+
+      <p class="hero-authors">
+        <span class="tbd">Author One</span><sup>1</sup>,
+        <span class="tbd">Author Two</span><sup>1,2</sup>,
+        <span class="tbd">Author Three</span><sup>2</sup>,
+        <span class="tbd">Author Four</span><sup>1</sup>
+      </p>
+      <p class="hero-affil">
+        <sup>1</sup> <span class="tbd">Your University</span>
+        &nbsp;·&nbsp;
+        <sup>2</sup> <span class="tbd">Your Lab / Institute</span>
+      </p>
+
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#" data-tbd="Paper URL">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v15a0 0 0 0 1 0 0H6a0 0 0 0 1 0 0V2Z"/></svg>
+          Paper
+        </a>
+        <a class="btn" href="#" data-tbd="Code URL">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 6-6 6 6 6M16 6l6 6-6 6"/></svg>
+          Code
+        </a>
+        <a class="btn" href="#" data-tbd="Dataset URL">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4.4 0 8 1.3 8 3s-3.6 3-8 3-8-1.3-8-3 3.6-3 8-3Z"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/></svg>
+          Dataset
+        </a>
+        <a class="btn" href="#leaderboard">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"/><path d="m7 15 4-5 3 3 5-7"/></svg>
+          Leaderboard
+        </a>
+      </div>
+
+      <ul class="hero-stats">
+        <li><b class="tbd">12</b><span>Tasks</span></li>
+        <li><b class="tbd">4</b><span>Capability dimensions</span></li>
+        <li><b class="tbd">18k</b><span>Instances</span></li>
+        <li><b class="tbd">9</b><span>Baseline models</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ====================================================== OVERVIEW -->
+  <section class="section" id="overview">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Overview</span>
+        <h2>Why CoMeBench</h2>
+      </div>
+
+      <div class="overview-grid">
+        <div class="prose">
+          <p>
+            <strong>CoMeBench</strong> is a <span class="tbd">benchmark for …</span>. It provides a
+            unified, reproducible evaluation protocol so that results across papers are directly
+            comparable, and it ships with <span class="tbd">a public dataset, evaluation scripts and a
+            maintained leaderboard</span>.
+          </p>
+          <p>
+            <span class="tbd">Write two or three sentences on the gap you are filling: what existing
+            benchmarks miss, and what CoMeBench does differently. Keep it concrete — a number or a
+            concrete failure mode of prior work reads far better than an adjective.</span>
+          </p>
+          <p>
+            Every task is <span class="tbd">language-conditioned / verifiable / automatically scored</span>,
+            and the whole suite can be run locally in <span class="tbd">under an hour on a single GPU</span>.
+          </p>
+        </div>
+
+        <aside class="card card-aside">
+          <h3>At a glance</h3>
+          <dl class="kv">
+            <div><dt>Release</dt><dd class="tbd">v1.0 · Nov 2026</dd></div>
+            <div><dt>License</dt><dd class="tbd">CC BY 4.0</dd></div>
+            <div><dt>Modality</dt><dd class="tbd">Text / Image / Video</dd></div>
+            <div><dt>Splits</dt><dd class="tbd">dev · test · hidden</dd></div>
+            <div><dt>Metric</dt><dd class="tbd">Accuracy · F1</dd></div>
+          </dl>
+          <a class="btn btn-primary btn-block" href="#" data-tbd="Dataset URL">Download dataset</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================================================== HIGHLIGHTS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Design</span>
+        <h2>What makes it different</h2>
+      </div>
+
+      <div class="cards-3">
+        <article class="card card-feature">
+          <div class="feature-icon" style="--i:1">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+          </div>
+          <h3><span class="tbd">Controlled difficulty</span></h3>
+          <p><span class="tbd">Each task varies one factor at a time, so a score drop can be attributed to a specific capability instead of being an average over confounded settings.</span></p>
+        </article>
+
+        <article class="card card-feature">
+          <div class="feature-icon" style="--i:2">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg>
+          </div>
+          <h3><span class="tbd">Automatic scoring</span></h3>
+          <p><span class="tbd">Every instance has a programmatic checker, so evaluation needs no human judges and runs identically on any machine.</span></p>
+        </article>
+
+        <article class="card card-feature">
+          <div class="feature-icon" style="--i:3">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17V7l6 5 6-5v10"/><path d="M18 7v10"/></svg>
+          </div>
+          <h3><span class="tbd">Held-out split</span></h3>
+          <p><span class="tbd">A hidden test split guards against overfitting to the public leaderboard, with a submission server for blind evaluation.</span></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================== BENCHMARK -->
+  <section class="section" id="benchmark">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Benchmark</span>
+        <h2>The task suite</h2>
+        <p class="section-desc">
+          <span class="tbd">Tasks are grouped into four capability dimensions. Replace the cards below
+          with your real task names and one-line descriptions.</span>
+        </p>
+      </div>
+
+      <div class="task-grid">
+        <article class="task">
+          <div class="task-top"><span class="tag">Dimension A</span><span class="task-no">01</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag">Dimension A</span><span class="task-no">02</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag tag-b">Dimension B</span><span class="task-no">03</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag tag-b">Dimension B</span><span class="task-no">04</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag tag-c">Dimension C</span><span class="task-no">05</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag tag-c">Dimension C</span><span class="task-no">06</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag tag-d">Dimension D</span><span class="task-no">07</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task">
+          <div class="task-top"><span class="tag tag-d">Dimension D</span><span class="task-no">08</span></div>
+          <h3><span class="tbd">Task name</span></h3>
+          <p><span class="tbd">One sentence describing what the model has to do.</span></p>
+        </article>
+        <article class="task task-more">
+          <div><span class="tbd">+ 4 more tasks</span></div>
+          <a href="#" data-tbd="Full task list" class="link-arrow">See the full list →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================================================== LEADERBOARD -->
+  <section class="section section-alt" id="leaderboard">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Leaderboard</span>
+        <h2>Current results</h2>
+        <p class="section-desc">
+          <span class="tbd">Numbers below are placeholders — replace them with your own evaluation
+          results, or wire this table to a JSON file.</span>
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="leaderboard">
+          <thead>
+            <tr>
+              <th class="col-rank">#</th>
+              <th>Model</th>
+              <th class="num">Dimension A</th>
+              <th class="num">Dimension B</th>
+              <th class="num">Dimension C</th>
+              <th class="num">Dimension D</th>
+              <th class="num col-avg">Average ↑</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-best">
+              <td class="col-rank"><span class="medal">1</span></td>
+              <td class="model"><span class="tbd">Your model</span> <span class="badge">ours</span></td>
+              <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+              <td class="num col-avg"><b>—</b></td>
+            </tr>
+            <tr>
+              <td class="col-rank">2</td>
+              <td class="model"><span class="tbd">Baseline B</span></td>
+              <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+              <td class="num col-avg">—</td>
+            </tr>
+            <tr>
+              <td class="col-rank">3</td>
+              <td class="model"><span class="tbd">Baseline A</span></td>
+              <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+              <td class="num col-avg">—</td>
+            </tr>
+            <tr class="row-human">
+              <td class="col-rank">–</td>
+              <td class="model">Human performance <span class="badge badge-ghost">upper bound</span></td>
+              <td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td>
+              <td class="num col-avg">—</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        Submit your results via the <a href="#" data-tbd="Submission form">leaderboard form</a>.
+        Entries are verified against the hidden test split before they appear here.
+      </p>
+    </div>
+  </section>
+
+  <!-- ========================================================= START -->
+  <section class="section" id="start">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Get started</span>
+        <h2>Run it in four steps</h2>
+      </div>
+
+      <div class="start-grid">
+        <div class="code-block">
+          <div class="code-head">
+            <span class="code-dots"><i></i><i></i><i></i></span>
+            <span class="code-title">terminal</span>
+            <button class="copy-btn" data-copy-target="quickstart">Copy</button>
+          </div>
+<pre id="quickstart"><code><span class="c-comment"># 1. get the code</span>
+git clone <span class="tbd">https://github.com/&lt;org&gt;/CoMeBench</span>
+<span class="c-cmd">cd</span> CoMeBench
+
+<span class="c-comment"># 2. install dependencies</span>
+pip install -e .
+
+<span class="c-comment"># 3. download the data</span>
+python scripts/download.py --root ./data
+
+<span class="c-comment"># 4. evaluate your model</span>
+python eval.py --model your-model --split test</code></pre>
+        </div>
+
+        <ol class="steps">
+          <li>
+            <span class="step-no">1</span>
+            <div><h4>Clone &amp; install</h4><p><span class="tbd">Requires Python 3.10+ and a single GPU.</span></p></div>
+          </li>
+          <li>
+            <span class="step-no">2</span>
+            <div><h4>Download data</h4><p><span class="tbd">~2.4 GB compressed, checksum-verified.</span></p></div>
+          </li>
+          <li>
+            <span class="step-no">3</span>
+            <div><h4>Plug in a model</h4><p><span class="tbd">Implement one predict() function, or use a bundled baseline.</span></p></div>
+          </li>
+          <li>
+            <span class="step-no">4</span>
+            <div><h4>Submit</h4><p><span class="tbd">Export predictions and upload to the leaderboard.</span></p></div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== CITE -->
+  <section class="section section-alt" id="cite">
+    <div class="container container-narrow">
+      <div class="section-head">
+        <span class="eyebrow">Citation</span>
+        <h2>Cite CoMeBench</h2>
+      </div>
+      <div class="code-block">
+        <div class="code-head">
+          <span class="code-dots"><i></i><i></i><i></i></span>
+          <span class="code-title">bibtex</span>
+          <button class="copy-btn" data-copy-target="bibtex">Copy</button>
+        </div>
+<pre id="bibtex"><code>@misc{<span class="tbd">yourtag</span>2026comebench,
+  title  = {CoMeBench: <span class="tbd">A Benchmark for …</span>},
+  author = {<span class="tbd">Last, First and Last, First</span>},
+  year   = {2026},
+  note   = {<span class="tbd">arXiv preprint / dataset release</span>},
+  url    = {<span class="tbd">https://…</span>}
+}</code></pre>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ========================================================== FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="assets/logo.svg" alt="CoMeBench" height="20">
+      <p><span class="tbd">A benchmark for …</span></p>
+    </div>
+    <div class="footer-links">
+      <a href="#" data-tbd="Paper URL">Paper</a>
+      <a href="#" data-tbd="Code URL">Code</a>
+      <a href="#" data-tbd="Dataset URL">Dataset</a>
+      <a href="#cite">Citation</a>
+    </div>
+    <p class="footer-note">
+      © 2026 <span class="tbd">Your Lab</span>. Page layout inspired by common academic project pages.
+    </p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
