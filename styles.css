@@ -732,6 +732,14 @@ code { font-family: var(--mono); }
   padding-left: 12px;
   border-left: 2px solid rgba(128, 119, 228, .35);
 }
+.demo-subhead {
+  margin: 0 0 8px;
+  font-size: 11.5px;
+  font-weight: 620;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #9aa3b2;
+}
 .demo-subs {
   list-style: none;
   margin: 0;

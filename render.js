@@ -255,6 +255,7 @@
               </div>
               <h3>${esc(it.title)}</h3>
               <p class="demo-prompt">${esc(it.prompt)}</p>
+              ${it.listLabel ? `<div class="demo-subhead">${esc(it.listLabel)}</div>` : ''}
               ${subs ? `<ol class="demo-subs">${subs}</ol>` : ''}
             </div>
           </article>`;
