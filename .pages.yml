@@ -79,9 +79,17 @@ content:
 
       # ------------------------------------------------------------ 首屏数字
       - name: hero
-        label: ② 首屏数字条
+        label: ② 首屏
         type: object
         fields:
+          - name: video
+            label: 背景视频
+            type: string
+            description: 留空则使用渐变背景。填 assets/ 下的文件名，例如 assets/openhlm-hero.mp4
+          - name: poster
+            label: 视频封面图
+            type: string
+            description: 视频加载前显示的静态图，例如 assets/hero-poster.jpg
           - name: stats
             label: 关键数字（建议 3–4 个）
             type: object

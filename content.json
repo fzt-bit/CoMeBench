@@ -22,6 +22,8 @@
   },
 
   "hero": {
+    "video": "assets/openhlm-hero.mp4",
+    "poster": "assets/hero-poster.jpg",
     "stats": [
       { "value": "12", "label": "Tasks" },
       { "value": "4", "label": "Capability dimensions" },

@@ -83,6 +83,8 @@
   /* ------------------------------------------------------------- hero */
   function renderHero(data) {
     const s = data.site;
+    const h = data.hero || {};
+    const hasVideo = !!(h.video && String(h.video).trim());
 
     const authors = (s.authors || [])
       .map((a) => `<span>${esc(a.name)}${a.sup ? `<sup>${esc(a.sup)}</sup>` : ''}</span>`)
@@ -108,21 +110,38 @@
       )
       .join('');
 
-    const stats = (data.hero && data.hero.stats ? data.hero.stats : [])
+    const stats = (h.stats || [])
       .map((st) => `<li><b>${esc(st.value)}</b><span>${esc(st.label)}</span></li>`)
       .join('');
 
+    // background: looping video when configured, otherwise the gradient blobs
+    const posterStyle =
+      hasVideo && h.poster ? ` style="background-image:url('${esc(h.poster)}')"` : '';
+
+    const bg = hasVideo
+      ? `<div class="hero-bg" aria-hidden="true"${posterStyle}>
+           <video class="hero-video-el" autoplay muted loop playsinline preload="metadata"${
+             h.poster ? ` poster="${esc(h.poster)}"` : ''
+           }>
+             <source src="${esc(h.video)}" type="video/mp4">
+           </video>
+         </div>
+         <div class="hero-scrim" aria-hidden="true"></div>`
+      : `<div class="hero-bg" aria-hidden="true">
+           <div class="blob blob-1"></div>
+           <div class="blob blob-2"></div>
+           <div class="blob blob-3"></div>
+           <div class="grid-lines"></div>
+         </div>`;
+
+    const logo = hasVideo ? 'assets/logo-light.svg' : 'assets/logo.svg';
+
     return `
-      <section class="hero">
-        <div class="hero-bg" aria-hidden="true">
-          <div class="blob blob-1"></div>
-          <div class="blob blob-2"></div>
-          <div class="blob blob-3"></div>
-          <div class="grid-lines"></div>
-        </div>
+      <section class="hero${hasVideo ? ' hero-video' : ''}">
+        ${bg}
         <div class="container hero-inner">
           ${s.venue ? `<div class="venue-pill"><span class="dot"></span><span>${esc(s.venue)}</span></div>` : ''}
-          <h1 class="hero-logo"><img src="assets/logo.svg" alt="${esc(s.title)}"></h1>
+          <h1 class="hero-logo"><img src="${logo}" alt="${esc(s.title)}"></h1>
           ${s.tagline ? `<p class="hero-sub">${md(s.tagline)}</p>` : ''}
           ${authors ? `<p class="hero-authors">${authors}</p>` : ''}
           ${affils ? `<p class="hero-affil">${affils}</p>` : ''}

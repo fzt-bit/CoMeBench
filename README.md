@@ -64,6 +64,33 @@ CoMeBench-site/
 必须用服务器打开，**不能直接双击 index.html**——浏览器会以 `file://` 协议
 拦截 `content.json` 的读取，页面会显示一段提示而不是内容。
 
+## 首屏背景视频
+
+首屏可以放一段循环播放的视频（参考 OpenHLM 的做法）。在 `content.json` 里：
+
+```json
+"hero": {
+  "video": "assets/openhlm-hero.mp4",
+  "poster": "assets/hero-poster.jpg",
+  "stats": [ … ]
+}
+```
+
+- `video` 留空 → 自动退回渐变背景（不会报错）
+- `poster` → 视频加载前显示的静态图，建议用 ffmpeg 抽第一帧：
+
+  ```powershell
+  ffmpeg -ss 1 -i assets/your-video.mp4 -frames:v 1 -q:v 3 assets/hero-poster.jpg
+  ```
+
+- 视频会被裁剪铺满（`object-fit: cover`），建议 **16:9、1280×720、H.264、无音轨**，
+  文件控制在 10 MB 以内。
+- 开启了 `autoplay muted loop playsinline`，浏览器才会允许静音自动播放。
+- 系统开启「减少动态效果」时，视频会被隐藏，只显示封面图。
+
+> 深色视频上用的是 `assets/logo-light.svg`（白色图形 + 保留渐变字标），
+> 浅色背景用 `assets/logo.svg`，渲染器会自动切换。
+
 ## 模块类型
 
 渲染器认识 5 种模块，都在 `render.js` 的 `RENDERERS` 里：
