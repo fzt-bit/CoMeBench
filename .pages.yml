@@ -250,6 +250,69 @@ content:
                 label: 更多卡片链接
                 type: string
 
+          - name: videos
+            label: 任务视频 + 层级标注
+            fields:
+              - name: id
+                label: 锚点 ID
+                type: string
+              - name: nav
+                label: 导航栏文字
+                type: string
+              - name: alternate
+                label: 使用浅灰背景
+                type: boolean
+              - name: eyebrow
+                label: 小标题
+                type: string
+              - name: heading
+                label: 大标题
+                type: string
+              - name: description
+                label: 标题下的说明
+                type: text
+              - name: items
+                label: 任务视频
+                type: object
+                list: true
+                fields:
+                  - name: tag
+                    label: 分类标签
+                    type: string
+                    description: General / Memory / Long-horizon
+                  - name: tagColor
+                    label: 标签配色
+                    type: string
+                    description: 填 a / b / c / d
+                  - name: title
+                    label: 任务名
+                    type: string
+                  - name: meta
+                    label: 摘要信息
+                    type: string
+                    description: 例如「5 subtasks · 27 s」
+                  - name: prompt
+                    label: 总 instruction
+                    type: text
+                  - name: video
+                    label: 视频地址
+                    type: string
+                    description: 例如 assets/task-b2.mp4
+                  - name: poster
+                    label: 视频封面
+                    type: string
+                  - name: subtasks
+                    label: 子任务
+                    type: object
+                    list: true
+                    fields:
+                      - name: name
+                        label: 子任务名
+                        type: string
+                      - name: text
+                        label: 详细说明
+                        type: text
+
           - name: table
             label: 榜单表格
             fields:

@@ -222,6 +222,48 @@
       return `<div class="task-grid">${items}${more}</div>`;
     },
 
+    /* 视频 + 层级标注（关键帧 = 技能边界） */
+    videos(sec) {
+      const items = (sec.items || [])
+        .map((it) => {
+          const color = it.tagColor && it.tagColor !== 'a' ? ` tag-${it.tagColor}` : '';
+
+          const subs = (it.subtasks || [])
+            .map((s, k) => {
+              const name = typeof s === 'string' ? s : s.name;
+              const text = typeof s === 'string' ? '' : s.text || '';
+              return `<li>
+                <span class="demo-sub-no">${String(k + 1).padStart(2, '0')}</span>
+                <div><b>${esc(name)}</b>${text ? `<em>${esc(text)}</em>` : ''}</div>
+              </li>`;
+            })
+            .join('');
+
+          return `<article class="demo">
+            <div class="demo-media">
+              <video preload="none" playsinline muted poster="${esc(it.poster || '')}">
+                <source src="${esc(it.video)}" type="video/mp4">
+              </video>
+              <button class="demo-play" type="button" aria-label="Play video">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </button>
+            </div>
+            <div class="demo-body">
+              <div class="demo-top">
+                <span class="tag${color}">${esc(it.tag)}</span>
+                <span class="demo-meta">${esc(it.meta || '')}</span>
+              </div>
+              <h3>${esc(it.title)}</h3>
+              <p class="demo-prompt">${esc(it.prompt)}</p>
+              ${subs ? `<ol class="demo-subs">${subs}</ol>` : ''}
+            </div>
+          </article>`;
+        })
+        .join('');
+
+      return `<div class="demos">${items}</div>`;
+    },
+
     /* 榜单表格 */
     table(sec) {
       const cols = (sec.columns || [])
@@ -421,6 +463,27 @@
           btn.textContent = original;
           btn.classList.remove('is-copied');
         }, 1600);
+      });
+    });
+
+    // task demo videos: poster + play overlay, load only on demand
+    document.querySelectorAll('.demo-media').forEach((box) => {
+      const video = box.querySelector('video');
+      const btn = box.querySelector('.demo-play');
+      if (!video) return;
+      const start = () => {
+        video.controls = true;
+        const p = video.play();
+        if (p && p.catch) p.catch(() => {});
+        if (btn) btn.classList.add('is-hidden');
+      };
+      if (btn) btn.addEventListener('click', start);
+      video.addEventListener('click', () => {
+        if (video.paused) start();
+        else video.pause();
+      });
+      video.addEventListener('ended', () => {
+        if (btn) btn.classList.remove('is-hidden');
       });
     });
 

@@ -109,6 +109,73 @@
     },
 
     {
+      "type": "videos",
+      "id": "annotation",
+      "nav": "Annotation",
+      "alternate": false,
+      "eyebrow": "Hierarchical annotation",
+      "heading": "Every keyframe is a skill boundary",
+      "description": "Operators mark a keyframe the moment a subtask completes, splitting each trajectory into temporally aligned segments. Each segment carries a subtask name and a fine-grained description, while each task carries both a task-level instruction and a step-wise instruction. Because segments are tied to the task graph, a keyframe is not just a timestamp — it is a skill instance with its own assumptions, invariants, and guarantees.",
+      "items": [
+        {
+          "tag": "General",
+          "tagColor": "a",
+          "title": "Take the basket out of the cabinet",
+          "meta": "5 subtasks · 27 s",
+          "prompt": "Kneel on one knee, pick up the basket with both hands, stand up, put it on the counter and lower both arms.",
+          "video": "assets/task-b2.mp4",
+          "poster": "assets/task-b2-poster.jpg",
+          "subtasks": [
+            { "name": "Kneel on one knee" },
+            { "name": "Grasp the basket with both hands" },
+            { "name": "Stand up while holding it" },
+            { "name": "Place it on the counter and release it" },
+            { "name": "Lower both arms" }
+          ]
+        },
+        {
+          "tag": "Memory",
+          "tagColor": "b",
+          "title": "Retrieve blocks from cups, then open the blue cup",
+          "meta": "7 subtasks · 55 s",
+          "prompt": "Wait for the operator to place blocks under inverted cups. Pick up the cup covering the red block, retrieve the red block, carry it to the cart, place it in the basket, return to the table, and lift the cup covering the blue block.",
+          "video": "assets/task-m4.mp4",
+          "poster": "assets/task-m4-poster.jpg",
+          "subtasks": [
+            { "name": "Wait for the operator to place blocks under the inverted cups" },
+            { "name": "Lift the cup covering the red block" },
+            { "name": "Retrieve the red block" },
+            { "name": "Carry it to the cart" },
+            { "name": "Place it in the basket" },
+            { "name": "Return to the table" },
+            { "name": "Lift the cup covering the blue block" }
+          ]
+        },
+        {
+          "tag": "Long-horizon",
+          "tagColor": "d",
+          "title": "Clean the living room",
+          "meta": "10 subtasks · 115 s",
+          "prompt": "Push the small cart from the center of the living room to the area in front of the sofa's left side. Turn right to face the sofa and inspect the room. Complete only the cleanup tasks required by the current scene: restore any fallen cushions, dispose of any trash on the coffee table, and, if an uncollected book is on the sofa and a used coffee cup is on the coffee table, pick up both items and leave the sofa area. Place the coffee cup in the cart's storage basket and the book in an empty space on the bookshelf. After all required tasks are complete, return to the cart and push it beside the cabinet.",
+          "video": "assets/task-h4.mp4",
+          "poster": "assets/task-h4-poster.jpg",
+          "subtasks": [
+            { "name": "Move the cart beside the sofa", "text": "Push the small cart from the center of the living room to the area in front of the sofa's left side. Turn right to face the sofa." },
+            { "name": "Inspect the living room", "text": "Check for fallen cushions, trash on the coffee table, an uncollected book on the sofa, and a used coffee cup on the coffee table. Perform only the subtasks for objects that are present." },
+            { "name": "Restore the near cushion", "text": "If a cushion has fallen near the sofa, pick it up and place it on the sofa." },
+            { "name": "Dispose of coffee-table trash", "text": "If trash is present on the coffee table, bring the trash bin, pick up the trash, and throw it into the bin." },
+            { "name": "Restore the far cushion", "text": "If another cushion has fallen on the far side, walk to it, pick it up, and place it on the sofa." },
+            { "name": "Collect the book and coffee cup", "text": "If an uncollected book is on the sofa and a used coffee cup is on the coffee table, pick up both items securely." },
+            { "name": "Leave the sofa area", "text": "Carry the book and coffee cup and walk out of the sofa area toward the cart." },
+            { "name": "Place the coffee cup in the cart", "text": "Place the coffee cup in the cart's storage basket and release it." },
+            { "name": "Place the book on the shelf", "text": "Carry the book to the bookshelf and place it in an empty space." },
+            { "name": "Store the cart", "text": "Return to the cart and push it beside the cabinet for storage." }
+          ]
+        }
+      ]
+    },
+
+    {
       "type": "table",
       "id": "leaderboard",
       "nav": "Leaderboard",
