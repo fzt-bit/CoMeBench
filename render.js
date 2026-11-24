@@ -467,35 +467,93 @@
       });
     });
 
-    // task demo videos: poster + play overlay, load only on demand
-    document.querySelectorAll('.demo-media').forEach((box) => {
+    // ---- task demo videos ------------------------------------------
+    // Play when the card is mostly on screen, pause when it leaves.
+    // A manual pause wins until the user presses play again.
+    // Reduced-motion users keep click-to-play only.
+    const reduceMotion =
+      window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const demoBoxes = [...document.querySelectorAll('.demo-media')];
+
+    demoBoxes.forEach((box) => {
       const video = box.querySelector('video');
       const btn = box.querySelector('.demo-play');
       if (!video) return;
-      const start = () => {
+
+      let autoPause = false;
+      let userPaused = false;
+
+      const hideBtn = () => btn && btn.classList.add('is-hidden');
+      const showBtn = () => btn && btn.classList.remove('is-hidden');
+
+      const play = () => {
         video.controls = true;
+        if (!video.paused) return;
         const p = video.play();
         if (p && p.catch) p.catch(() => {});
-        if (btn) btn.classList.add('is-hidden');
       };
-      if (btn) btn.addEventListener('click', start);
-      video.addEventListener('click', () => {
-        if (video.paused) start();
-        else video.pause();
+
+      if (btn) {
+        btn.addEventListener('click', () => {
+          userPaused = false;
+          play();
+        });
+      }
+
+      video.addEventListener('play', hideBtn);
+
+      video.addEventListener('pause', () => {
+        // a pause we triggered ourselves must not count as "user paused"
+        if (!autoPause) userPaused = true;
+        autoPause = false;
+        showBtn();
       });
-      video.addEventListener('ended', () => {
-        if (btn) btn.classList.remove('is-hidden');
-      });
+
+      video.addEventListener('ended', showBtn);
+
+      box._demoVideo = {
+        play,
+        shouldAutoPlay: () => !userPaused,
+        pauseByScript: () => {
+          if (video.paused) return;
+          autoPause = true;
+          video.pause();
+        }
+      };
     });
+
+    if (!reduceMotion && demoBoxes.length) {
+      const syncVisibility = () => {
+        const viewport = window.innerHeight || document.documentElement.clientHeight;
+        demoBoxes.forEach((box) => {
+          const api = box._demoVideo;
+          if (!api) return;
+          const r = box.getBoundingClientRect();
+          const visible = Math.min(r.bottom, viewport) - Math.max(r.top, 0);
+          const ratio = r.height > 0 ? visible / r.height : 0;
+          if (ratio >= 0.55) {
+            if (api.shouldAutoPlay()) api.play();
+          } else {
+            api.pauseByScript();
+          }
+        });
+      };
+
+      window.addEventListener('scroll', syncVisibility, { passive: true });
+      window.addEventListener('resize', syncVisibility);
+      syncVisibility();
+    }
 
     // placeholder links do nothing instead of jumping to the top
     document.querySelectorAll('[data-placeholder]').forEach((a) => {
       a.addEventListener('click', (e) => e.preventDefault());
-    });
-    document.querySelectorAll('a[href="#"]').forEach((a) => {
+    });    document.querySelectorAll('a[href="#"]').forEach((a) => {
       a.addEventListener('click', (e) => e.preventDefault());
       a.title = 'Placeholder — add the real URL in content.json';
     });
+
+
   }
 
   /* ------------------------------------------------------------- boot */

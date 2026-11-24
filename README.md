@@ -93,15 +93,23 @@ CoMeBench-site/
 
 ## 模块类型
 
-渲染器认识 5 种模块，都在 `render.js` 的 `RENDERERS` 里：
+渲染器认识 6 种模块，都在 `render.js` 的 `RENDERERS` 里：
 
 | type | 长什么样 | 主要字段 |
 |---|---|---|
 | `overview` | 左文字 + 右侧信息卡 | paragraphs, aside |
 | `cards` | 三列特性卡片 | items(icon/title/text) |
 | `tasks` | 任务卡片网格 + 「更多」卡 | items(tag/tagColor/title/text) |
+| `videos` | 任务演示视频 + 层级标注 | items(tag/title/meta/prompt/video/poster/subtasks/listLabel) |
 | `table` | 榜单表格 | columns, rows, note |
 | `code` | 深色代码块（可带步骤列表） | filename, code, steps |
+
+### `videos` 模块的播放行为
+
+- 卡片**滚动到 55% 以上可见时自动播放**，滚出视口自动暂停（不会三个视频同时跑）
+- 只加载封面图，`preload="none"`，滚到了才开始拉视频流，首屏不为它付流量
+- 用户手动暂停后不会再被自动播放打断，直到他自己点播放
+- 系统开启「减少动态效果」时，退化为纯点击播放
 
 **想加一种新模块**（比如「图片墙」「时间线」「视频嵌入」）：在
 `render.js` 的 `RENDERERS` 里加一个函数，再在 `.pages.yml` 的 `blocks`
